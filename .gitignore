@@ -1,0 +1,7 @@
+## sonar 
+.scannerwork
+*.out
+
+## golang
+vendor/*
+*.test
