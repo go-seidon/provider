@@ -62,8 +62,8 @@ func NewGoValidator() *goValidator {
 func LabelTagName() CustomTagName {
 	return func(field reflect.StructField) string {
 		name := strings.SplitN(field.Tag.Get("label"), ",", 2)[0]
-		if name == "-" {
-			return ""
+		if name == "-" || name == "" {
+			return field.Name
 		}
 		return name
 	}
