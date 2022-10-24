@@ -9,6 +9,6 @@ func (e *SystemError) Error() string {
 	return e.Message
 }
 
-func New(c int32, m string) *SystemError {
+func NewError(c int32, m string) *SystemError {
 	return &SystemError{c, m}
 }
