@@ -1,4 +1,4 @@
-package error
+package system
 
 type SystemError struct {
 	Code    int32
