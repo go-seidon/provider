@@ -5,6 +5,6 @@ type SystemSuccess struct {
 	Message string
 }
 
-func NewSuccess(c int32, m string) *SystemSuccess {
-	return &SystemSuccess{c, m}
+func NewSuccess(c int32, m string) SystemSuccess {
+	return SystemSuccess{c, m}
 }
