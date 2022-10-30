@@ -53,6 +53,8 @@ generate-mock:
 	mockgen -package=mock_config -source config/config.go -destination=config/mock/config_mock.go
 	mockgen -package=mock_context -source context/context.go -destination=context/mock/context_mock.go
 	mockgen -package=mock_datetime -source datetime/clock.go -destination=datetime/mock/clock_mock.go
+	mockgen -package=mock_dbmongo -source db-mongo/client.go -destination=db-mongo/mock/client_mock.go
+	mockgen -package=mock_dbmysql -source db-mysql/client.go -destination=db-mysql/mock/client_mock.go
 	mockgen -package=mock_encoding -source encoding/encoder.go -destination=encoding/mock/encoder_mock.go
 	mockgen -package=mock_hashing -source hashing/hasher.go -destination=hashing/mock/hasher_mock.go
 	mockgen -package=mock_identifier -source identifier/id.go -destination=identifier/mock/id_mock.go
