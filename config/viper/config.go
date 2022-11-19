@@ -93,15 +93,15 @@ func (c *viperConfig) ParseConfig(cfg interface{}) error {
 	})
 }
 
-func NewConfig(opts ...Option) (*viperConfig, error) {
-	option := ConfigOption{}
+func NewConfig(opts ...ConfigOption) (*viperConfig, error) {
+	p := ConfigParam{}
 	for _, opt := range opts {
-		opt(&option)
+		opt(&p)
 	}
 
 	client := viper.New()
-	if option.FileName != "" {
-		client.SetConfigFile(option.FileName)
+	if p.FileName != "" {
+		client.SetConfigFile(p.FileName)
 	}
 	client.AllowEmptyEnv(true)
 	client.AutomaticEnv()

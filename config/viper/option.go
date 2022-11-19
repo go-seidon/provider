@@ -1,13 +1,13 @@
 package viper
 
-type ConfigOption struct {
+type ConfigParam struct {
 	FileName string
 }
 
-type Option func(*ConfigOption)
+type ConfigOption func(*ConfigParam)
 
-func WithFileName(name string) Option {
-	return func(co *ConfigOption) {
+func WithFileName(name string) ConfigOption {
+	return func(co *ConfigParam) {
 		co.FileName = name
 	}
 }

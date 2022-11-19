@@ -12,10 +12,10 @@ var _ = Describe("Logging Package", func() {
 		When("parameter is specified", func() {
 			It("should return result", func() {
 				opt := viper.WithFileName(".env")
-				var res viper.ConfigOption
-				opt(&res)
+				var p viper.ConfigParam
+				opt(&p)
 
-				Expect(res.FileName).To(Equal(".env"))
+				Expect(p.FileName).To(Equal(".env"))
 			})
 		})
 	})
