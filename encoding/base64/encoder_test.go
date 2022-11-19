@@ -1,18 +1,25 @@
-package encoding_test
+package base64_test
 
 import (
-	"encoding/base64"
+	encoding_base64 "encoding/base64"
+	"testing"
 
 	"github.com/go-seidon/provider/encoding"
+	"github.com/go-seidon/provider/encoding/base64"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
+func TestBase64(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "Base64 Package")
+}
+
 var _ = Describe("Base64 Encoder Package", func() {
-	Context("NewBase64Encoder function", Label("unit"), func() {
+	Context("NewEncoder function", Label("unit"), func() {
 		When("function is called", func() {
 			It("should return result", func() {
-				res := encoding.NewBase64Encoder()
+				res := base64.NewEncoder()
 
 				Expect(res).ToNot(BeNil())
 			})
@@ -26,7 +33,7 @@ var _ = Describe("Base64 Encoder Package", func() {
 		)
 
 		BeforeEach(func() {
-			encoder = encoding.NewBase64Encoder()
+			encoder = base64.NewEncoder()
 			d = []byte("some-data")
 		})
 
@@ -47,7 +54,7 @@ var _ = Describe("Base64 Encoder Package", func() {
 		)
 
 		BeforeEach(func() {
-			encoder = encoding.NewBase64Encoder()
+			encoder = base64.NewEncoder()
 			d = "c29tZS1kYXRh"
 		})
 
@@ -56,7 +63,7 @@ var _ = Describe("Base64 Encoder Package", func() {
 				res, err := encoder.Decode("\\")
 
 				Expect(res).To(Equal([]byte{}))
-				Expect(err).To(Equal(base64.CorruptInputError(0)))
+				Expect(err).To(Equal(encoding_base64.CorruptInputError(0)))
 			})
 		})
 
