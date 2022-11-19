@@ -1,18 +1,25 @@
-package hashing_test
+package bcrypt_test
 
 import (
 	"fmt"
+	"testing"
 
 	"github.com/go-seidon/provider/hashing"
+	"github.com/go-seidon/provider/hashing/bcrypt"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
+func TestBcrypt(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "Bcrypt Package")
+}
+
 var _ = Describe("Bcrypt Hasher Package", func() {
-	Context("NewBcryptHasher function", Label("unit"), func() {
+	Context("NewHasher function", Label("unit"), func() {
 		When("function is called", func() {
 			It("should return result", func() {
-				res := hashing.NewBcryptHasher()
+				res := bcrypt.NewHasher()
 
 				Expect(res).ToNot(BeNil())
 			})
@@ -26,7 +33,7 @@ var _ = Describe("Bcrypt Hasher Package", func() {
 		)
 
 		BeforeEach(func() {
-			h = hashing.NewBcryptHasher()
+			h = bcrypt.NewHasher()
 			text = "some-secret"
 		})
 
@@ -51,7 +58,7 @@ var _ = Describe("Bcrypt Hasher Package", func() {
 		)
 
 		BeforeEach(func() {
-			h = hashing.NewBcryptHasher()
+			h = bcrypt.NewHasher()
 			text = "some-secret"
 			hash = "$2a$10$xA9.FPfIYi2ZI6V5/jw5leFVUCjsgN4lBS5iS8loLv1hngJj1ys/2"
 		})
