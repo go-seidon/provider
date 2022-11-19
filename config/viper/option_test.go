@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Logging Package", func() {
+var _ = Describe("Option Package", func() {
 
 	Context("WithFileName function", Label("unit"), func() {
 		When("parameter is specified", func() {
