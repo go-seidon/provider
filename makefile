@@ -25,7 +25,7 @@ clean-dependency:
 
 .PHONY: test
 test:
-	go test ./... -coverprofile coverage.out
+	go test ./.../ -p 1 -race -coverprofile coverage.out
 	go tool cover -func coverage.out | grep ^total:
 
 .PHONY: test-coverage
@@ -54,11 +54,11 @@ generate-mock:
 	mockgen -package=mock_context -source context/context.go -destination=context/mock/context_mock.go
 	mockgen -package=mock_datetime -source datetime/clock.go -destination=datetime/mock/clock_mock.go
 	mockgen -package=mock_dbmongo -source db-mongo/client.go -destination=db-mongo/mock/client_mock.go
-	mockgen -package=mock_dbmysql -source db-mysql/client.go -destination=db-mysql/mock/client_mock.go
 	mockgen -package=mock_encoding -source encoding/encoder.go -destination=encoding/mock/encoder_mock.go
 	mockgen -package=mock_hashing -source hashing/hasher.go -destination=hashing/mock/hasher_mock.go
 	mockgen -package=mock_identifier -source identifier/id.go -destination=identifier/mock/id_mock.go
 	mockgen -package=mock_io -source io/io.go -destination=io/mock/io_mock.go
 	mockgen -package=mock_logging -source logging/log.go -destination=logging/mock/log_mock.go
+	mockgen -package=mock_mysql -source mysql/client.go -destination=mysql/mock/client_mock.go
 	mockgen -package=mock_serialization -source serialization/serializer.go -destination=serialization/mock/serializer_mock.go
 	mockgen -package=mock_validation -source validation/validator.go -destination=validation/mock/validator_mock.go

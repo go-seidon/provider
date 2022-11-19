@@ -1,28 +1,28 @@
-package db_mysql_test
+package mysql_test
 
 import (
 	"testing"
 
-	db_mysql "github.com/go-seidon/provider/db-mysql"
+	"github.com/go-seidon/provider/mysql"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
-func TestDbMySQL(t *testing.T) {
+func TestMySQL(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "DB MySQL Package")
+	RunSpecs(t, "MySQL Package")
 }
 
 var _ = Describe("Client Package", func() {
 	Context("NewClient function", Label("unit"), func() {
 		When("success create client", func() {
 			It("should return result", func() {
-				res, err := db_mysql.NewClient(
-					db_mysql.WithAuth("user", "pw"),
-					db_mysql.WithConfig(db_mysql.ClientConfig{
+				res, err := mysql.NewClient(
+					mysql.WithAuth("user", "pw"),
+					mysql.WithConfig(mysql.ClientConfig{
 						DbName: "db_name",
 					}),
-					db_mysql.WithLocation("host", 3306),
+					mysql.WithLocation("host", 3306),
 				)
 
 				Expect(res).ToNot(BeNil())
@@ -32,13 +32,13 @@ var _ = Describe("Client Package", func() {
 
 		When("parse time is used", func() {
 			It("should return result", func() {
-				res, err := db_mysql.NewClient(
-					db_mysql.WithAuth("user", "pw"),
-					db_mysql.WithConfig(db_mysql.ClientConfig{
+				res, err := mysql.NewClient(
+					mysql.WithAuth("user", "pw"),
+					mysql.WithConfig(mysql.ClientConfig{
 						DbName: "db_name",
 					}),
-					db_mysql.WithLocation("host", 3306),
-					db_mysql.ParseTime(),
+					mysql.WithLocation("host", 3306),
+					mysql.ParseTime(),
 				)
 
 				Expect(res).ToNot(BeNil())
