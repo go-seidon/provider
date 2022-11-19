@@ -55,11 +55,12 @@ generate-mock:
 	mockgen -package=mock_datetime -source datetime/clock.go -destination=datetime/mock/clock_mock.go
 	mockgen -package=mock_encoding -source encoding/encoder.go -destination=encoding/mock/encoder_mock.go
 	mockgen -package=mock_hashing -source hashing/hasher.go -destination=hashing/mock/hasher_mock.go
+	mockgen -package=mock_http -source http/client.go -destination=http/mock/client_mock.go
 	mockgen -package=mock_identifier -source identifier/id.go -destination=identifier/mock/id_mock.go
 	mockgen -package=mock_io -source io/io.go -destination=io/mock/io_mock.go
 	mockgen -package=mock_logging -source logging/log.go -destination=logging/mock/log_mock.go
 	mockgen -package=mock_mongo -source mongo/client.go -destination=mongo/mock/client_mock.go
 	mockgen -package=mock_mysql -source mysql/client.go -destination=mysql/mock/client_mock.go
-	mockgen -package=mock_slugger -source slugger/slugger.go -destination=slugger/mock/slugger_mock.go
+	mockgen -package=mock_slug -source slug/slugger.go -destination=slug/mock/slugger_mock.go
 	mockgen -package=mock_serialization -source serialization/serializer.go -destination=serialization/mock/serializer_mock.go
 	mockgen -package=mock_validation -source validation/validator.go -destination=validation/mock/validator_mock.go
