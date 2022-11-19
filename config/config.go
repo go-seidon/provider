@@ -1,10 +1,13 @@
 package config
 
-import "time"
+import (
+	"time"
+)
 
 type Config interface {
 	Getter
 	Setter
+	Checker
 	Manager
 }
 
@@ -23,20 +26,12 @@ type Setter interface {
 	SetDefault(key string, value interface{}) error
 }
 
-type Manager interface {
+type Checker interface {
 	IsSet(key string) (bool, error)
+}
+
+// @note: deprecate soon since this func is probably doing too much
+type Manager interface {
 	LoadConfig() error
 	ParseConfig(cfg interface{}) error
-}
-
-type ConfigOption struct {
-	FileName string
-}
-
-type Option func(*ConfigOption)
-
-func WithFileName(name string) Option {
-	return func(co *ConfigOption) {
-		co.FileName = name
-	}
 }
