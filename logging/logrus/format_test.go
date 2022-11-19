@@ -10,7 +10,7 @@ import (
 	logrus_client "github.com/sirupsen/logrus"
 )
 
-var _ = Describe("Logrus Formater Package", func() {
+var _ = Describe("Formater Package", func() {
 
 	Context("Format function", Label("unit"), func() {
 		var (
