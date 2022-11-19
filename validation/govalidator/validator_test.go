@@ -1,11 +1,19 @@
-package validation_test
+package govalidator_test
 
 import (
+	"testing"
+
 	"github.com/go-seidon/provider/validation"
+	"github.com/go-seidon/provider/validation/govalidator"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
+
+func TestGoValidator(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "Go Validator Package")
+}
 
 var _ = Describe("Go Validator", func() {
 
@@ -15,7 +23,7 @@ var _ = Describe("Go Validator", func() {
 		)
 
 		BeforeEach(func() {
-			validator = validation.NewGoValidator()
+			validator = govalidator.NewValidator()
 		})
 
 		When("there is no invalid data", func() {
