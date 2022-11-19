@@ -14,27 +14,27 @@ type LogParam struct {
 type LogOption func(*LogParam)
 
 func WithAppContext(name, version string) LogOption {
-	return func(lo *LogParam) {
-		lo.AppCtxEnabled = true
-		lo.AppName = name
-		lo.AppVersion = version
+	return func(p *LogParam) {
+		p.AppCtxEnabled = true
+		p.AppName = name
+		p.AppVersion = version
 	}
 }
 
 func EnableDebugging() LogOption {
-	return func(lo *LogParam) {
-		lo.DebuggingEnabled = true
+	return func(p *LogParam) {
+		p.DebuggingEnabled = true
 	}
 }
 
 func EnablePrettyPrint() LogOption {
-	return func(lo *LogParam) {
-		lo.PrettyPrintEnabled = true
+	return func(p *LogParam) {
+		p.PrettyPrintEnabled = true
 	}
 }
 
 func AddStackSkip(pkg string) LogOption {
-	return func(lo *LogParam) {
-		lo.StackSkip = append(lo.StackSkip, pkg)
+	return func(p *LogParam) {
+		p.StackSkip = append(p.StackSkip, pkg)
 	}
 }
