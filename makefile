@@ -60,5 +60,6 @@ generate-mock:
 	mockgen -package=mock_logging -source logging/log.go -destination=logging/mock/log_mock.go
 	mockgen -package=mock_mongo -source mongo/client.go -destination=mongo/mock/client_mock.go
 	mockgen -package=mock_mysql -source mysql/client.go -destination=mysql/mock/client_mock.go
+	mockgen -package=mock_slugger -source slugger/slugger.go -destination=slugger/mock/slugger_mock.go
 	mockgen -package=mock_serialization -source serialization/serializer.go -destination=serialization/mock/serializer_mock.go
 	mockgen -package=mock_validation -source validation/validator.go -destination=validation/mock/validator_mock.go
