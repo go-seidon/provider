@@ -389,6 +389,44 @@ func (mr *MockSetterMockRecorder) SetDefault(key, value interface{}) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetDefault", reflect.TypeOf((*MockSetter)(nil).SetDefault), key, value)
 }
 
+// MockChecker is a mock of Checker interface.
+type MockChecker struct {
+	ctrl     *gomock.Controller
+	recorder *MockCheckerMockRecorder
+}
+
+// MockCheckerMockRecorder is the mock recorder for MockChecker.
+type MockCheckerMockRecorder struct {
+	mock *MockChecker
+}
+
+// NewMockChecker creates a new mock instance.
+func NewMockChecker(ctrl *gomock.Controller) *MockChecker {
+	mock := &MockChecker{ctrl: ctrl}
+	mock.recorder = &MockCheckerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockChecker) EXPECT() *MockCheckerMockRecorder {
+	return m.recorder
+}
+
+// IsSet mocks base method.
+func (m *MockChecker) IsSet(key string) (bool, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IsSet", key)
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IsSet indicates an expected call of IsSet.
+func (mr *MockCheckerMockRecorder) IsSet(key interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsSet", reflect.TypeOf((*MockChecker)(nil).IsSet), key)
+}
+
 // MockManager is a mock of Manager interface.
 type MockManager struct {
 	ctrl     *gomock.Controller
@@ -410,21 +448,6 @@ func NewMockManager(ctrl *gomock.Controller) *MockManager {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockManager) EXPECT() *MockManagerMockRecorder {
 	return m.recorder
-}
-
-// IsSet mocks base method.
-func (m *MockManager) IsSet(key string) (bool, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "IsSet", key)
-	ret0, _ := ret[0].(bool)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// IsSet indicates an expected call of IsSet.
-func (mr *MockManagerMockRecorder) IsSet(key interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsSet", reflect.TypeOf((*MockManager)(nil).IsSet), key)
 }
 
 // LoadConfig mocks base method.

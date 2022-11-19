@@ -1,20 +1,27 @@
-package config_test
+package viper_test
 
 import (
 	"os"
+	"testing"
 	"time"
 
 	"github.com/go-seidon/provider/config"
+	"github.com/go-seidon/provider/config/viper"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
+func TestViper(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "Viper Package")
+}
+
 var _ = Describe("Viper Package", func() {
 
-	Context("NewViperConfig function", Label("unit"), func() {
+	Context("NewConfig function", Label("unit"), func() {
 		When("parameter is not specified", func() {
 			It("should return result", func() {
-				res, err := config.NewViperConfig()
+				res, err := viper.NewConfig()
 
 				Expect(res).ToNot(BeNil())
 				Expect(err).To(BeNil())
@@ -23,7 +30,7 @@ var _ = Describe("Viper Package", func() {
 
 		When("file name is specified", func() {
 			It("should return result", func() {
-				res, err := config.NewViperConfig(config.WithFileName(".env"))
+				res, err := viper.NewConfig(viper.WithFileName(".env"))
 
 				Expect(res).ToNot(BeNil())
 				Expect(err).To(BeNil())
@@ -37,7 +44,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -59,7 +66,7 @@ var _ = Describe("Viper Package", func() {
 				res, err := cfg.Get("TEST_UNAVAILABLE_KEY")
 
 				Expect(res).To(BeNil())
-				Expect(err).To(Equal(config.ErrorConfigNotFound))
+				Expect(err).To(Equal(config.ErrNotFound))
 			})
 		})
 	})
@@ -70,7 +77,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -92,7 +99,7 @@ var _ = Describe("Viper Package", func() {
 				res, err := cfg.GetBool("TEST_UNAVAILABLE_KEY")
 
 				Expect(res).To(Equal(false))
-				Expect(err).To(Equal(config.ErrorConfigNotFound))
+				Expect(err).To(Equal(config.ErrNotFound))
 			})
 		})
 	})
@@ -103,7 +110,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -125,7 +132,7 @@ var _ = Describe("Viper Package", func() {
 				res, err := cfg.GetFloat64("TEST_UNAVAILABLE_KEY")
 
 				Expect(res).To(Equal(float64(0)))
-				Expect(err).To(Equal(config.ErrorConfigNotFound))
+				Expect(err).To(Equal(config.ErrNotFound))
 			})
 		})
 	})
@@ -136,7 +143,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -158,7 +165,7 @@ var _ = Describe("Viper Package", func() {
 				res, err := cfg.GetInt("TEST_UNAVAILABLE_KEY")
 
 				Expect(res).To(Equal(0))
-				Expect(err).To(Equal(config.ErrorConfigNotFound))
+				Expect(err).To(Equal(config.ErrNotFound))
 			})
 		})
 	})
@@ -169,7 +176,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -191,7 +198,7 @@ var _ = Describe("Viper Package", func() {
 				res, err := cfg.GetString("TEST_UNAVAILABLE_KEY")
 
 				Expect(res).To(Equal(""))
-				Expect(err).To(Equal(config.ErrorConfigNotFound))
+				Expect(err).To(Equal(config.ErrNotFound))
 			})
 		})
 	})
@@ -202,7 +209,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -225,7 +232,7 @@ var _ = Describe("Viper Package", func() {
 				res, err := cfg.GetTime("TEST_UNAVAILABLE_KEY")
 
 				Expect(res).To(Equal(time.Time{}))
-				Expect(err).To(Equal(config.ErrorConfigNotFound))
+				Expect(err).To(Equal(config.ErrNotFound))
 			})
 		})
 	})
@@ -236,7 +243,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -259,7 +266,7 @@ var _ = Describe("Viper Package", func() {
 				res, err := cfg.GetDuration("TEST_UNAVAILABLE_KEY")
 
 				Expect(res).To(Equal(time.Duration(0)))
-				Expect(err).To(Equal(config.ErrorConfigNotFound))
+				Expect(err).To(Equal(config.ErrNotFound))
 			})
 		})
 	})
@@ -270,7 +277,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -294,7 +301,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -318,7 +325,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		AfterEach(func() {
@@ -352,7 +359,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		When("failed load config", func() {
@@ -370,7 +377,7 @@ var _ = Describe("Viper Package", func() {
 		)
 
 		BeforeEach(func() {
-			cfg, _ = config.NewViperConfig()
+			cfg, _ = viper.NewConfig()
 		})
 
 		When("success parse config", func() {

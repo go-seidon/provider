@@ -1,8 +1,9 @@
-package config
+package viper
 
 import (
 	"time"
 
+	"github.com/go-seidon/provider/config"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 )
@@ -13,65 +14,58 @@ type viperConfig struct {
 
 func (c *viperConfig) Get(key string) (interface{}, error) {
 	if !c.client.IsSet(key) {
-		return nil, ErrorConfigNotFound
+		return nil, config.ErrNotFound
 	}
 
-	res := c.client.Get(key)
-	return res, nil
+	return c.client.Get(key), nil
 }
 
 func (c *viperConfig) GetBool(key string) (bool, error) {
 	if !c.client.IsSet(key) {
-		return false, ErrorConfigNotFound
+		return false, config.ErrNotFound
 	}
 
-	res := c.client.GetBool(key)
-	return res, nil
+	return c.client.GetBool(key), nil
 }
 
 func (c *viperConfig) GetFloat64(key string) (float64, error) {
 	if !c.client.IsSet(key) {
-		return 0, ErrorConfigNotFound
+		return 0, config.ErrNotFound
 	}
 
-	res := c.client.GetFloat64(key)
-	return res, nil
+	return c.client.GetFloat64(key), nil
 }
 
 func (c *viperConfig) GetInt(key string) (int, error) {
 	if !c.client.IsSet(key) {
-		return 0, ErrorConfigNotFound
+		return 0, config.ErrNotFound
 	}
 
-	res := c.client.GetInt(key)
-	return res, nil
+	return c.client.GetInt(key), nil
 }
 
 func (c *viperConfig) GetString(key string) (string, error) {
 	if !c.client.IsSet(key) {
-		return "", ErrorConfigNotFound
+		return "", config.ErrNotFound
 	}
 
-	res := c.client.GetString(key)
-	return res, nil
+	return c.client.GetString(key), nil
 }
 
 func (c *viperConfig) GetTime(key string) (time.Time, error) {
 	if !c.client.IsSet(key) {
-		return time.Time{}, ErrorConfigNotFound
+		return time.Time{}, config.ErrNotFound
 	}
 
-	res := c.client.GetTime(key)
-	return res, nil
+	return c.client.GetTime(key), nil
 }
 
 func (c *viperConfig) GetDuration(key string) (time.Duration, error) {
 	if !c.client.IsSet(key) {
-		return 0, ErrorConfigNotFound
+		return 0, config.ErrNotFound
 	}
 
-	res := c.client.GetDuration(key)
-	return res, nil
+	return c.client.GetDuration(key), nil
 }
 
 func (c *viperConfig) Set(key string, value interface{}) error {
@@ -85,21 +79,21 @@ func (c *viperConfig) SetDefault(key string, value interface{}) error {
 }
 
 func (c *viperConfig) IsSet(key string) (bool, error) {
-	res := c.client.IsSet(key)
-	return res, nil
+	return c.client.IsSet(key), nil
 }
 
 func (c *viperConfig) LoadConfig() error {
 	return c.client.ReadInConfig()
 }
 
+// @note: deprecate soon since this func is probably doing too much
 func (c *viperConfig) ParseConfig(cfg interface{}) error {
 	return c.client.Unmarshal(cfg, func(dc *mapstructure.DecoderConfig) {
 		dc.TagName = "env"
 	})
 }
 
-func NewViperConfig(opts ...Option) (*viperConfig, error) {
+func NewConfig(opts ...Option) (*viperConfig, error) {
 	option := ConfigOption{}
 	for _, opt := range opts {
 		opt(&option)

@@ -1,25 +1,18 @@
-package config_test
+package viper_test
 
 import (
-	"testing"
-
-	"github.com/go-seidon/provider/config"
+	"github.com/go-seidon/provider/config/viper"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
-
-func TestConfig(t *testing.T) {
-	RegisterFailHandler(Fail)
-	RunSpecs(t, "Config Package")
-}
 
 var _ = Describe("Logging Package", func() {
 
 	Context("WithFileName function", Label("unit"), func() {
 		When("parameter is specified", func() {
 			It("should return result", func() {
-				opt := config.WithFileName(".env")
-				var res config.ConfigOption
+				opt := viper.WithFileName(".env")
+				var res viper.ConfigOption
 				opt(&res)
 
 				Expect(res.FileName).To(Equal(".env"))
