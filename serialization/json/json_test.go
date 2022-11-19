@@ -1,18 +1,25 @@
-package serialization_test
+package json_test
 
 import (
-	"encoding/json"
+	encoding_json "encoding/json"
+	"testing"
 
 	"github.com/go-seidon/provider/serialization"
+	"github.com/go-seidon/provider/serialization/json"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
+func TestJsonSerialization(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "Json Serialization Package")
+}
+
 var _ = Describe("Json Serialization Package", func() {
-	Context("NewJsonSerializer function", Label("unit"), func() {
+	Context("NewSerializer function", Label("unit"), func() {
 		When("function is called", func() {
 			It("should return result", func() {
-				res := serialization.NewJsonSerializer()
+				res := json.NewSerializer()
 
 				Expect(res).ToNot(BeNil())
 			})
@@ -25,7 +32,7 @@ var _ = Describe("Json Serialization Package", func() {
 		)
 
 		BeforeEach(func() {
-			serializer = serialization.NewJsonSerializer()
+			serializer = json.NewSerializer()
 		})
 
 		When("success encode data", func() {
@@ -33,7 +40,7 @@ var _ = Describe("Json Serialization Package", func() {
 				d := struct{}{}
 				res, err := serializer.Marshal(d)
 
-				expected, _ := json.Marshal(d)
+				expected, _ := encoding_json.Marshal(d)
 				Expect(err).To(BeNil())
 				Expect(res).To(Equal(expected))
 			})
@@ -53,7 +60,7 @@ var _ = Describe("Json Serialization Package", func() {
 			It("should return result", func() {
 				res, err := serializer.Marshal(nil)
 
-				expected, _ := json.Marshal(nil)
+				expected, _ := encoding_json.Marshal(nil)
 				Expect(err).To(BeNil())
 				Expect(res).To(Equal(expected))
 			})
@@ -71,7 +78,7 @@ var _ = Describe("Json Serialization Package", func() {
 		)
 
 		BeforeEach(func() {
-			serializer = serialization.NewJsonSerializer()
+			serializer = json.NewSerializer()
 			d = []byte(`{"val":"ok"}`)
 		})
 

@@ -1,4 +1,4 @@
-package serialization
+package json
 
 import "encoding/json"
 
@@ -13,6 +13,6 @@ func (s *jsonSerializer) Unmarshal(i []byte, o interface{}) error {
 	return json.Unmarshal(i, o)
 }
 
-func NewJsonSerializer() *jsonSerializer {
+func NewSerializer() *jsonSerializer {
 	return &jsonSerializer{}
 }
