@@ -1,25 +1,18 @@
-package logging_test
+package logrus_test
 
 import (
-	"testing"
-
-	"github.com/go-seidon/provider/logging"
+	"github.com/go-seidon/provider/logging/logrus"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
-
-func TestLog(t *testing.T) {
-	RegisterFailHandler(Fail)
-	RunSpecs(t, "Log Package")
-}
 
 var _ = Describe("Logging Package", func() {
 
 	Context("WithAppContext function", Label("unit"), func() {
 		When("parameter is specified", func() {
 			It("should return result", func() {
-				opt := logging.WithAppContext("mock-name", "mock-version")
-				var res logging.LogParam
+				opt := logrus.WithAppContext("mock-name", "mock-version")
+				var res logrus.LogParam
 				opt(&res)
 
 				Expect(res.AppName).To(Equal("mock-name"))
@@ -34,8 +27,8 @@ var _ = Describe("Logging Package", func() {
 	Context("EnableDebugging function", Label("unit"), func() {
 		When("function is called", func() {
 			It("should return result", func() {
-				opt := logging.EnableDebugging()
-				var res logging.LogParam
+				opt := logrus.EnableDebugging()
+				var res logrus.LogParam
 				opt(&res)
 
 				Expect(res.DebuggingEnabled).To(BeTrue())
@@ -50,8 +43,8 @@ var _ = Describe("Logging Package", func() {
 	Context("EnablePrettyPrint function", Label("unit"), func() {
 		When("function is called", func() {
 			It("should return result", func() {
-				opt := logging.EnablePrettyPrint()
-				var res logging.LogParam
+				opt := logrus.EnablePrettyPrint()
+				var res logrus.LogParam
 				opt(&res)
 
 				Expect(res.PrettyPrintEnabled).To(BeTrue())
@@ -66,8 +59,8 @@ var _ = Describe("Logging Package", func() {
 	Context("AddStackSkip function", Label("unit"), func() {
 		When("add one stack skip", func() {
 			It("should return result", func() {
-				opt := logging.AddStackSkip("some-pkg")
-				var res logging.LogParam
+				opt := logrus.AddStackSkip("some-pkg")
+				var res logrus.LogParam
 				opt(&res)
 
 				Expect(res.StackSkip).To(Equal([]string{
@@ -82,9 +75,9 @@ var _ = Describe("Logging Package", func() {
 
 		When("add two stack skip", func() {
 			It("should return result", func() {
-				opt1 := logging.AddStackSkip("some-pkg-1")
-				opt2 := logging.AddStackSkip("some-pkg-2")
-				var res logging.LogParam
+				opt1 := logrus.AddStackSkip("some-pkg-1")
+				opt2 := logrus.AddStackSkip("some-pkg-2")
+				var res logrus.LogParam
 				opt1(&res)
 				opt2(&res)
 

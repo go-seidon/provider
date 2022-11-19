@@ -1,26 +1,26 @@
-package logging_test
+package logrus_test
 
 import (
 	"bytes"
 	"fmt"
 
-	"github.com/go-seidon/provider/logging"
+	"github.com/go-seidon/provider/logging/logrus"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"github.com/sirupsen/logrus"
+	logrus_client "github.com/sirupsen/logrus"
 )
 
 var _ = Describe("Logrus Formater Package", func() {
 
 	Context("Format function", Label("unit"), func() {
 		var (
-			formatter *logging.GoFormatter
-			entry     *logrus.Entry
+			formatter *logrus.GoFormatter
+			entry     *logrus_client.Entry
 		)
 
 		BeforeEach(func() {
-			formatter = &logging.GoFormatter{}
-			entry = &logrus.Entry{}
+			formatter = &logrus.GoFormatter{}
+			entry = &logrus_client.Entry{}
 		})
 
 		When("success format message", func() {
@@ -34,7 +34,7 @@ var _ = Describe("Logrus Formater Package", func() {
 
 		When("data contain error", func() {
 			It("should return result", func() {
-				entry.Data = logrus.Fields{
+				entry.Data = logrus_client.Fields{
 					"error": fmt.Errorf("some error"),
 				}
 				res, err := formatter.Format(entry)
@@ -46,7 +46,7 @@ var _ = Describe("Logrus Formater Package", func() {
 
 		When("data contain field", func() {
 			It("should return result", func() {
-				entry.Data = logrus.Fields{
+				entry.Data = logrus_client.Fields{
 					"key": "value",
 				}
 				res, err := formatter.Format(entry)

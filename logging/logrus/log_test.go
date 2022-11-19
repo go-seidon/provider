@@ -1,20 +1,27 @@
-package logging_test
+package logrus_test
 
 import (
 	"context"
 	"fmt"
+	"testing"
 
 	"github.com/go-seidon/provider/logging"
+	"github.com/go-seidon/provider/logging/logrus"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
+func TestLogrus(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "Logrus Package")
+}
+
 var _ = Describe("Logrus Package", func() {
 
-	Context("NewLogrusLog function", Label("unit"), func() {
+	Context("NewLogger function", Label("unit"), func() {
 		When("option is not specified", func() {
 			It("should return result", func() {
-				res := logging.NewLogrusLog()
+				res := logrus.NewLogger()
 
 				Expect(res).ToNot(BeNil())
 			})
@@ -22,8 +29,8 @@ var _ = Describe("Logrus Package", func() {
 
 		When("option is specified", func() {
 			It("should return result", func() {
-				opt := logging.WithAppContext("mock-name", "mock-version")
-				res := logging.NewLogrusLog(opt)
+				opt := logrus.WithAppContext("mock-name", "mock-version")
+				res := logrus.NewLogger(opt)
 
 				Expect(res).ToNot(BeNil())
 			})
@@ -31,9 +38,9 @@ var _ = Describe("Logrus Package", func() {
 
 		When("debugging is enabled", func() {
 			It("should return result", func() {
-				opt1 := logging.WithAppContext("mock-name", "mock-version")
-				opt2 := logging.EnableDebugging()
-				res := logging.NewLogrusLog(opt1, opt2)
+				opt1 := logrus.WithAppContext("mock-name", "mock-version")
+				opt2 := logrus.EnableDebugging()
+				res := logrus.NewLogger(opt1, opt2)
 
 				Expect(res).ToNot(BeNil())
 			})
@@ -46,7 +53,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -63,7 +70,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -80,7 +87,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -97,7 +104,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -114,7 +121,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -131,7 +138,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -148,7 +155,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -165,7 +172,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -182,7 +189,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -199,7 +206,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -216,7 +223,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -233,7 +240,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -250,7 +257,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -267,7 +274,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -284,7 +291,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -301,7 +308,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -319,7 +326,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -337,7 +344,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("success send log", func() {
@@ -355,7 +362,7 @@ var _ = Describe("Logrus Package", func() {
 		)
 
 		BeforeEach(func() {
-			logger = logging.NewLogrusLog()
+			logger = logrus.NewLogger()
 		})
 
 		When("level is valid", func() {

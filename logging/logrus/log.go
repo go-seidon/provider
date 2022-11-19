@@ -1,12 +1,31 @@
-package logging
+package logrus
 
 import (
 	"context"
 	"io"
 	"os"
 
+	"github.com/go-seidon/provider/logging"
 	"github.com/sirupsen/logrus"
 )
+
+const (
+	FIELD_SERVICE = "service"
+	FIELD_ERROR   = "error"
+)
+
+type LogMessage struct {
+	Timestamp      string `json:"timestamp"`
+	Message        string `json:"message"`
+	Severity       string `json:"severity"`
+	ReportLocation struct {
+		FilePath     string `json:"filePath,omitempty"`
+		LineNumber   int    `json:"lineNumber,omitempty"`
+		FunctionName string `json:"functionName,omitempty"`
+	} `json:"reportLocation,omitempty"`
+	Service  interface{}            `json:"service,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+}
 
 type logrusLog struct {
 	client *logrus.Entry
@@ -87,7 +106,7 @@ func (l *logrusLog) Warnln(msg ...interface{}) {
 	l.client.Warnln(msg...)
 }
 
-func (l *logrusLog) WithFields(fs map[string]interface{}) Logger {
+func (l *logrusLog) WithFields(fs map[string]interface{}) logging.Logger {
 	entry := l.client.WithFields(fs)
 	nl := &logrusLog{
 		client: entry,
@@ -95,7 +114,7 @@ func (l *logrusLog) WithFields(fs map[string]interface{}) Logger {
 	return nl
 }
 
-func (l *logrusLog) WithError(err error) Logger {
+func (l *logrusLog) WithError(err error) logging.Logger {
 	entry := l.client.WithField(FIELD_ERROR, err)
 	nl := &logrusLog{
 		client: entry,
@@ -103,7 +122,7 @@ func (l *logrusLog) WithError(err error) Logger {
 	return nl
 }
 
-func (l *logrusLog) WithContext(ctx context.Context) Logger {
+func (l *logrusLog) WithContext(ctx context.Context) logging.Logger {
 	entry := l.client.WithContext(ctx)
 	nl := &logrusLog{
 		client: entry,
@@ -119,7 +138,7 @@ func (l *logrusLog) WriterLevel(level string) io.Writer {
 	return l.client.WriterLevel(lvl)
 }
 
-func NewLogrusLog(opts ...LogOption) *logrusLog {
+func NewLogger(opts ...LogOption) *logrusLog {
 	p := LogParam{
 		StackSkip: []string{
 			"github.com/sirupsen/logrus",

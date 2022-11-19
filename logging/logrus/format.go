@@ -1,4 +1,4 @@
-package logging
+package logrus
 
 import (
 	"bytes"
