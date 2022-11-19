@@ -1,16 +1,16 @@
-package identifier_test
+package ksuid_test
 
 import (
 	"testing"
 
-	"github.com/go-seidon/provider/identifier"
+	"github.com/go-seidon/provider/identifier/ksuid"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
-func TestText(t *testing.T) {
+func TestKsuid(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Text Package")
+	RunSpecs(t, "Ksuid Package")
 }
 
 var _ = Describe("KSU Identifier", func() {
@@ -18,7 +18,7 @@ var _ = Describe("KSU Identifier", func() {
 	Context("GenerateId function", Label("unit"), func() {
 		When("success generate id", func() {
 			It("should return result", func() {
-				ksuid := identifier.NewKsuid()
+				ksuid := ksuid.NewIdentifier()
 				id, err := ksuid.GenerateId()
 
 				Expect(err).To(BeNil())

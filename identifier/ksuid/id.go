@@ -1,4 +1,4 @@
-package identifier
+package ksuid
 
 import (
 	"github.com/segmentio/ksuid"
@@ -15,6 +15,6 @@ func (i *ksuIdentifier) GenerateId() (string, error) {
 	return id.String(), nil
 }
 
-func NewKsuid() *ksuIdentifier {
+func NewIdentifier() *ksuIdentifier {
 	return &ksuIdentifier{}
 }
