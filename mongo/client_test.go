@@ -1,25 +1,25 @@
-package db_mongo_test
+package mongo_test
 
 import (
 	"fmt"
 	"testing"
 
-	db_mongo "github.com/go-seidon/provider/db-mongo"
+	"github.com/go-seidon/provider/mongo"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
-func TestDbMongo(t *testing.T) {
+func TestMongo(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "DB Mongo Package")
+	RunSpecs(t, "Mongo Package")
 }
 
 var _ = Describe("Client Package", func() {
 	Context("NewClient function", Label("unit"), func() {
 		When("db mode is not valid", func() {
 			It("should return error", func() {
-				res, err := db_mongo.NewClient(
-					db_mongo.WithConfig(db_mongo.ClientConfig{
+				res, err := mongo.NewClient(
+					mongo.WithConfig(mongo.ClientConfig{
 						DbName: "db_name",
 						DbMode: "invalid",
 					}),
@@ -32,12 +32,12 @@ var _ = Describe("Client Package", func() {
 
 		When("auth mode is not valid", func() {
 			It("should return error", func() {
-				res, err := db_mongo.NewClient(
-					db_mongo.WithConfig(db_mongo.ClientConfig{
+				res, err := mongo.NewClient(
+					mongo.WithConfig(mongo.ClientConfig{
 						DbName:   "db_name",
 						AuthMode: "invalid",
 					}),
-					db_mongo.UsingStandalone("host", 27017),
+					mongo.UsingStandalone("host", 27017),
 				)
 
 				Expect(res).To(BeNil())
@@ -47,12 +47,12 @@ var _ = Describe("Client Package", func() {
 
 		When("success create standalone client", func() {
 			It("should return result", func() {
-				res, err := db_mongo.NewClient(
-					db_mongo.WithBasicAuth("user", "pw", "db_name"),
-					db_mongo.WithConfig(db_mongo.ClientConfig{
+				res, err := mongo.NewClient(
+					mongo.WithBasicAuth("user", "pw", "db_name"),
+					mongo.WithConfig(mongo.ClientConfig{
 						DbName: "db_name",
 					}),
-					db_mongo.UsingStandalone("host", 27017),
+					mongo.UsingStandalone("host", 27017),
 				)
 
 				Expect(res).ToNot(BeNil())
@@ -62,12 +62,12 @@ var _ = Describe("Client Package", func() {
 
 		When("success create replica client", func() {
 			It("should return result", func() {
-				res, err := db_mongo.NewClient(
-					db_mongo.WithBasicAuth("user", "pw", "db_name"),
-					db_mongo.WithConfig(db_mongo.ClientConfig{
+				res, err := mongo.NewClient(
+					mongo.WithBasicAuth("user", "pw", "db_name"),
+					mongo.WithConfig(mongo.ClientConfig{
 						DbName: "db_name",
 					}),
-					db_mongo.UsingReplication("rs-name", []string{"h1:27030", "h2:27031"}),
+					mongo.UsingReplication("rs-name", []string{"h1:27030", "h2:27031"}),
 				)
 
 				Expect(res).ToNot(BeNil())
