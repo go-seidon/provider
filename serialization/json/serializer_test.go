@@ -10,12 +10,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestJsonSerialization(t *testing.T) {
+func TestJson(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Json Serialization Package")
+	RunSpecs(t, "Json Package")
 }
 
-var _ = Describe("Json Serialization Package", func() {
+var _ = Describe("Serializer Package", func() {
 	Context("NewSerializer function", Label("unit"), func() {
 		When("function is called", func() {
 			It("should return result", func() {
