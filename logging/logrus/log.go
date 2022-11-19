@@ -14,6 +14,7 @@ const (
 	FIELD_ERROR   = "error"
 )
 
+// @note: move to logging package soon (root folder)
 type LogMessage struct {
 	Timestamp      string `json:"timestamp"`
 	Message        string `json:"message"`
