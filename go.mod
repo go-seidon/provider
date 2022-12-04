@@ -18,4 +18,5 @@ require (
 	github.com/spf13/viper v1.13.0
 	go.mongodb.org/mongo-driver v1.10.3
 	golang.org/x/crypto v0.0.0-20221012134737-56aed061732a
+	google.golang.org/protobuf v1.28.1
 )

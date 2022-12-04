@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package testdata;
+
+option go_package = "./testdata";
+
+message SimpleMessage {
+  int32 int32 = 1;
+  float float32 = 2;
+  string string = 3;
+  bool bool = 4;
+}
