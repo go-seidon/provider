@@ -1,25 +1,27 @@
-package json_test
+package protobuf_test
 
 import (
-	encoding_json "encoding/json"
+	"fmt"
 	"testing"
 
 	"github.com/go-seidon/provider/serialization"
-	"github.com/go-seidon/provider/serialization/json"
+	"github.com/go-seidon/provider/serialization/protobuf"
+	"github.com/go-seidon/provider/testdata"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"google.golang.org/protobuf/proto"
 )
 
-func TestJson(t *testing.T) {
+func TestProtobuf(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Json Package")
+	RunSpecs(t, "Protobuf Package")
 }
 
 var _ = Describe("Serializer Package", func() {
 	Context("NewSerializer function", Label("unit"), func() {
 		When("function is called", func() {
 			It("should return result", func() {
-				res := json.NewSerializer()
+				res := protobuf.NewSerializer()
 
 				Expect(res).ToNot(BeNil())
 			})
@@ -32,15 +34,17 @@ var _ = Describe("Serializer Package", func() {
 		)
 
 		BeforeEach(func() {
-			serializer = json.NewSerializer()
+			serializer = protobuf.NewSerializer()
 		})
 
 		When("success encode data", func() {
 			It("should return result", func() {
-				d := struct{}{}
+				d := &testdata.SimpleMessage{
+					String_: "text",
+				}
 				res, err := serializer.Marshal(d)
 
-				expected, _ := encoding_json.Marshal(d)
+				expected, _ := proto.Marshal(d)
 				Expect(err).To(BeNil())
 				Expect(res).To(Equal(expected))
 			})
@@ -51,7 +55,7 @@ var _ = Describe("Serializer Package", func() {
 				d := make(chan int)
 				res, err := serializer.Marshal(d)
 
-				Expect(err).ToNot(BeNil())
+				Expect(err).To(Equal(fmt.Errorf("invalid message")))
 				Expect(res).To(BeNil())
 			})
 		})
@@ -60,17 +64,13 @@ var _ = Describe("Serializer Package", func() {
 			It("should return result", func() {
 				res, err := serializer.Marshal(nil)
 
-				expected, _ := encoding_json.Marshal(nil)
-				Expect(err).To(BeNil())
-				Expect(res).To(Equal(expected))
+				Expect(err).To(Equal(fmt.Errorf("invalid message")))
+				Expect(res).To(BeNil())
 			})
 		})
 	})
 
 	Context("Unmarshal function", Label("unit"), func() {
-		type Data struct {
-			Val string `json:"val"`
-		}
 
 		var (
 			d          []byte
@@ -78,38 +78,40 @@ var _ = Describe("Serializer Package", func() {
 		)
 
 		BeforeEach(func() {
-			serializer = json.NewSerializer()
-			d = []byte(`{"val":"ok"}`)
+			serializer = protobuf.NewSerializer()
+			b := &testdata.SimpleMessage{
+				String_: "text",
+			}
+			d, _ = proto.Marshal(b)
 		})
 
 		When("success decode data", func() {
 			It("should return result", func() {
-				var res Data
+				var res testdata.SimpleMessage
 				err := serializer.Unmarshal(d, &res)
 
 				Expect(err).To(BeNil())
-				Expect(res.Val).To(Equal("ok"))
+				Expect(res.String_).To(Equal("text"))
 			})
 		})
 
 		When("failed decode data", func() {
 			It("should return error", func() {
-				var res Data
+				var res string
 				d = []byte{}
 				err := serializer.Unmarshal(d, &res)
 
 				Expect(err).ToNot(BeNil())
-				Expect(res.Val).To(Equal(""))
 			})
 		})
 
 		When("data is nil", func() {
-			It("should return error", func() {
-				var res Data
+			It("should return empty result", func() {
+				var res testdata.SimpleMessage
 				err := serializer.Unmarshal(nil, &res)
 
-				Expect(err.Error()).To(Equal("unexpected end of JSON input"))
-				Expect(res.Val).To(Equal(""))
+				Expect(err).To(BeNil())
+				Expect(res.String_).To(Equal(""))
 			})
 		})
 	})
