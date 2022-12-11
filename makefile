@@ -62,6 +62,8 @@ generate-mock:
 	mockgen -package=mock_logging -source logging/log.go -destination=logging/mock/log_mock.go
 	mockgen -package=mock_mongo -source mongo/client.go -destination=mongo/mock/client_mock.go
 	mockgen -package=mock_mysql -source mysql/client.go -destination=mysql/mock/client_mock.go
+	mockgen -package=mock_queueing -source queueing/queueing.go -destination=queueing/mock/queueing_mock.go
+	mockgen -package=mock_rabbitmq -source rabbitmq/connection.go -destination=rabbitmq/mock/connection_mock.go
 	mockgen -package=mock_random -source random/randomizer.go -destination=random/mock/randomizer_mock.go
 	mockgen -package=mock_slug -source slug/slugger.go -destination=slug/mock/slugger_mock.go
 	mockgen -package=mock_serialization -source serialization/serializer.go -destination=serialization/mock/serializer_mock.go
