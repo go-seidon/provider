@@ -24,7 +24,8 @@ type Queuer interface {
 }
 
 type Manager interface {
-	Init(ctx context.Context) error
+	Open(ctx context.Context) error
+	Close(ctx context.Context) error
 }
 
 type Exchange interface {
