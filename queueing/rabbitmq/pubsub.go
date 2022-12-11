@@ -2,6 +2,7 @@ package rabbitmq
 
 import (
 	"context"
+	"time"
 
 	"github.com/go-seidon/provider/queueing"
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -48,7 +49,26 @@ func (que *rabbitQueue) Subscribe(ctx context.Context, p queueing.SubscribeParam
 	forever := make(chan bool)
 	go func() {
 		for d := range delivery {
-			p.Listener(ctx, &message{d: d})
+			startedAt := que.clock.Now().UTC()
+
+			err := p.Listener(ctx, &message{d: d})
+
+			finishedAt := que.clock.Now().UTC()
+
+			log := que.logger.WithFields(map[string]interface{}{
+				"queue_name":   p.QueueName,
+				"message_id":   d.MessageId,
+				"published_at": d.Timestamp.UTC().Format(time.RFC3339),
+				"started_at":   startedAt.Format(time.RFC3339),
+				"finished_at":  finishedAt.Format(time.RFC3339),
+			})
+
+			if err != nil {
+				log.WithError(err).Errorf("Failed processing %s at %s", d.MessageId, p.QueueName)
+			} else {
+				log.Infof("Processing %s at %s", d.MessageId, p.QueueName)
+			}
+
 		}
 	}()
 	<-forever
