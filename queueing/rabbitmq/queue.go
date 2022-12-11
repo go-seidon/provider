@@ -6,6 +6,8 @@ import (
 	"github.com/go-seidon/provider/datetime"
 	"github.com/go-seidon/provider/identifier"
 	"github.com/go-seidon/provider/identifier/ksuid"
+	"github.com/go-seidon/provider/logging"
+	"github.com/go-seidon/provider/logging/logrus"
 	"github.com/go-seidon/provider/queueing"
 	"github.com/go-seidon/provider/rabbitmq"
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -15,6 +17,7 @@ type rabbitQueue struct {
 	conn       rabbitmq.Connection
 	clock      datetime.Clock
 	identifier identifier.Identifier
+	logger     logging.Logger
 }
 
 func (que *rabbitQueue) DeclareQueue(ctx context.Context, p queueing.DeclareQueueParam) (*queueing.DeclareQueueResult, error) {
@@ -61,9 +64,15 @@ func NewQueueing(opts ...RabbitOption) *rabbitQueue {
 		identifier = ksuid.NewIdentifier()
 	}
 
+	logger := p.Logger
+	if logger == nil {
+		logger = logrus.NewLogger()
+	}
+
 	return &rabbitQueue{
 		conn:       p.Connection,
 		clock:      clock,
 		identifier: identifier,
+		logger:     logger,
 	}
 }
