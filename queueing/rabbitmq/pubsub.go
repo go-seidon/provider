@@ -14,9 +14,17 @@ func (que *rabbitQueue) Publish(ctx context.Context, p queueing.PublishParam) er
 	}
 	defer ch.Close()
 
+	currentTs := que.clock.Now().UTC()
+	id, err := que.identifier.GenerateId()
+	if err != nil {
+		return err
+	}
+
 	err = ch.PublishWithContext(ctx, p.ExchangeName, "", true, false, amqp.Publishing{
 		Body:         p.MessageBody,
 		DeliveryMode: amqp.Persistent,
+		Timestamp:    currentTs,
+		MessageId:    id,
 	})
 	if err != nil {
 		return err
