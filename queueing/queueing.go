@@ -16,7 +16,7 @@ const (
 	EXCHANGE_HEADERS = "headers"
 )
 
-type Queueing interface {
+type Queuer interface {
 	Manager
 	Exchange
 	Pubsub

@@ -13,31 +13,31 @@ import (
 	gomock "github.com/golang/mock/gomock"
 )
 
-// MockQueueing is a mock of Queueing interface.
-type MockQueueing struct {
+// MockQueuer is a mock of Queuer interface.
+type MockQueuer struct {
 	ctrl     *gomock.Controller
-	recorder *MockQueueingMockRecorder
+	recorder *MockQueuerMockRecorder
 }
 
-// MockQueueingMockRecorder is the mock recorder for MockQueueing.
-type MockQueueingMockRecorder struct {
-	mock *MockQueueing
+// MockQueuerMockRecorder is the mock recorder for MockQueuer.
+type MockQueuerMockRecorder struct {
+	mock *MockQueuer
 }
 
-// NewMockQueueing creates a new mock instance.
-func NewMockQueueing(ctrl *gomock.Controller) *MockQueueing {
-	mock := &MockQueueing{ctrl: ctrl}
-	mock.recorder = &MockQueueingMockRecorder{mock}
+// NewMockQueuer creates a new mock instance.
+func NewMockQueuer(ctrl *gomock.Controller) *MockQueuer {
+	mock := &MockQueuer{ctrl: ctrl}
+	mock.recorder = &MockQueuerMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockQueueing) EXPECT() *MockQueueingMockRecorder {
+func (m *MockQueuer) EXPECT() *MockQueuerMockRecorder {
 	return m.recorder
 }
 
 // BindQueue mocks base method.
-func (m *MockQueueing) BindQueue(ctx context.Context, p queueing.BindQueueParam) error {
+func (m *MockQueuer) BindQueue(ctx context.Context, p queueing.BindQueueParam) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "BindQueue", ctx, p)
 	ret0, _ := ret[0].(error)
@@ -45,13 +45,13 @@ func (m *MockQueueing) BindQueue(ctx context.Context, p queueing.BindQueueParam)
 }
 
 // BindQueue indicates an expected call of BindQueue.
-func (mr *MockQueueingMockRecorder) BindQueue(ctx, p interface{}) *gomock.Call {
+func (mr *MockQueuerMockRecorder) BindQueue(ctx, p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BindQueue", reflect.TypeOf((*MockQueueing)(nil).BindQueue), ctx, p)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BindQueue", reflect.TypeOf((*MockQueuer)(nil).BindQueue), ctx, p)
 }
 
 // DeclareExchange mocks base method.
-func (m *MockQueueing) DeclareExchange(ctx context.Context, p queueing.DeclareExchangeParam) error {
+func (m *MockQueuer) DeclareExchange(ctx context.Context, p queueing.DeclareExchangeParam) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeclareExchange", ctx, p)
 	ret0, _ := ret[0].(error)
@@ -59,13 +59,13 @@ func (m *MockQueueing) DeclareExchange(ctx context.Context, p queueing.DeclareEx
 }
 
 // DeclareExchange indicates an expected call of DeclareExchange.
-func (mr *MockQueueingMockRecorder) DeclareExchange(ctx, p interface{}) *gomock.Call {
+func (mr *MockQueuerMockRecorder) DeclareExchange(ctx, p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeclareExchange", reflect.TypeOf((*MockQueueing)(nil).DeclareExchange), ctx, p)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeclareExchange", reflect.TypeOf((*MockQueuer)(nil).DeclareExchange), ctx, p)
 }
 
 // DeclareQueue mocks base method.
-func (m *MockQueueing) DeclareQueue(ctx context.Context, p queueing.DeclareQueueParam) (*queueing.DeclareQueueResult, error) {
+func (m *MockQueuer) DeclareQueue(ctx context.Context, p queueing.DeclareQueueParam) (*queueing.DeclareQueueResult, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeclareQueue", ctx, p)
 	ret0, _ := ret[0].(*queueing.DeclareQueueResult)
@@ -74,13 +74,13 @@ func (m *MockQueueing) DeclareQueue(ctx context.Context, p queueing.DeclareQueue
 }
 
 // DeclareQueue indicates an expected call of DeclareQueue.
-func (mr *MockQueueingMockRecorder) DeclareQueue(ctx, p interface{}) *gomock.Call {
+func (mr *MockQueuerMockRecorder) DeclareQueue(ctx, p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeclareQueue", reflect.TypeOf((*MockQueueing)(nil).DeclareQueue), ctx, p)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeclareQueue", reflect.TypeOf((*MockQueuer)(nil).DeclareQueue), ctx, p)
 }
 
 // Init mocks base method.
-func (m *MockQueueing) Init(ctx context.Context) error {
+func (m *MockQueuer) Init(ctx context.Context) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Init", ctx)
 	ret0, _ := ret[0].(error)
@@ -88,13 +88,13 @@ func (m *MockQueueing) Init(ctx context.Context) error {
 }
 
 // Init indicates an expected call of Init.
-func (mr *MockQueueingMockRecorder) Init(ctx interface{}) *gomock.Call {
+func (mr *MockQueuerMockRecorder) Init(ctx interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Init", reflect.TypeOf((*MockQueueing)(nil).Init), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Init", reflect.TypeOf((*MockQueuer)(nil).Init), ctx)
 }
 
 // Publish mocks base method.
-func (m *MockQueueing) Publish(ctx context.Context, p queueing.PublishParam) error {
+func (m *MockQueuer) Publish(ctx context.Context, p queueing.PublishParam) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Publish", ctx, p)
 	ret0, _ := ret[0].(error)
@@ -102,13 +102,13 @@ func (m *MockQueueing) Publish(ctx context.Context, p queueing.PublishParam) err
 }
 
 // Publish indicates an expected call of Publish.
-func (mr *MockQueueingMockRecorder) Publish(ctx, p interface{}) *gomock.Call {
+func (mr *MockQueuerMockRecorder) Publish(ctx, p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Publish", reflect.TypeOf((*MockQueueing)(nil).Publish), ctx, p)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Publish", reflect.TypeOf((*MockQueuer)(nil).Publish), ctx, p)
 }
 
 // Subscribe mocks base method.
-func (m *MockQueueing) Subscribe(ctx context.Context, p queueing.SubscribeParam) error {
+func (m *MockQueuer) Subscribe(ctx context.Context, p queueing.SubscribeParam) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Subscribe", ctx, p)
 	ret0, _ := ret[0].(error)
@@ -116,9 +116,9 @@ func (m *MockQueueing) Subscribe(ctx context.Context, p queueing.SubscribeParam)
 }
 
 // Subscribe indicates an expected call of Subscribe.
-func (mr *MockQueueingMockRecorder) Subscribe(ctx, p interface{}) *gomock.Call {
+func (mr *MockQueuerMockRecorder) Subscribe(ctx, p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Subscribe", reflect.TypeOf((*MockQueueing)(nil).Subscribe), ctx, p)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Subscribe", reflect.TypeOf((*MockQueuer)(nil).Subscribe), ctx, p)
 }
 
 // MockManager is a mock of Manager interface.
