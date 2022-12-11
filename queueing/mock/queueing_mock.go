@@ -50,6 +50,20 @@ func (mr *MockQueuerMockRecorder) BindQueue(ctx, p interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BindQueue", reflect.TypeOf((*MockQueuer)(nil).BindQueue), ctx, p)
 }
 
+// Close mocks base method.
+func (m *MockQueuer) Close(ctx context.Context) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Close", ctx)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Close indicates an expected call of Close.
+func (mr *MockQueuerMockRecorder) Close(ctx interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Close", reflect.TypeOf((*MockQueuer)(nil).Close), ctx)
+}
+
 // DeclareExchange mocks base method.
 func (m *MockQueuer) DeclareExchange(ctx context.Context, p queueing.DeclareExchangeParam) error {
 	m.ctrl.T.Helper()
@@ -79,18 +93,18 @@ func (mr *MockQueuerMockRecorder) DeclareQueue(ctx, p interface{}) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeclareQueue", reflect.TypeOf((*MockQueuer)(nil).DeclareQueue), ctx, p)
 }
 
-// Init mocks base method.
-func (m *MockQueuer) Init(ctx context.Context) error {
+// Open mocks base method.
+func (m *MockQueuer) Open(ctx context.Context) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Init", ctx)
+	ret := m.ctrl.Call(m, "Open", ctx)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// Init indicates an expected call of Init.
-func (mr *MockQueuerMockRecorder) Init(ctx interface{}) *gomock.Call {
+// Open indicates an expected call of Open.
+func (mr *MockQueuerMockRecorder) Open(ctx interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Init", reflect.TypeOf((*MockQueuer)(nil).Init), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Open", reflect.TypeOf((*MockQueuer)(nil).Open), ctx)
 }
 
 // Publish mocks base method.
@@ -144,18 +158,32 @@ func (m *MockManager) EXPECT() *MockManagerMockRecorder {
 	return m.recorder
 }
 
-// Init mocks base method.
-func (m *MockManager) Init(ctx context.Context) error {
+// Close mocks base method.
+func (m *MockManager) Close(ctx context.Context) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Init", ctx)
+	ret := m.ctrl.Call(m, "Close", ctx)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// Init indicates an expected call of Init.
-func (mr *MockManagerMockRecorder) Init(ctx interface{}) *gomock.Call {
+// Close indicates an expected call of Close.
+func (mr *MockManagerMockRecorder) Close(ctx interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Init", reflect.TypeOf((*MockManager)(nil).Init), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Close", reflect.TypeOf((*MockManager)(nil).Close), ctx)
+}
+
+// Open mocks base method.
+func (m *MockManager) Open(ctx context.Context) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Open", ctx)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Open indicates an expected call of Open.
+func (mr *MockManagerMockRecorder) Open(ctx interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Open", reflect.TypeOf((*MockManager)(nil).Open), ctx)
 }
 
 // MockExchange is a mock of Exchange interface.
