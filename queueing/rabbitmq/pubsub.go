@@ -37,7 +37,7 @@ func (que *rabbitQueue) Subscribe(ctx context.Context, p queueing.SubscribeParam
 		return err
 	}
 
-	var forever chan struct{}
+	forever := make(chan bool)
 	go func() {
 		for d := range delivery {
 			p.Listener(ctx, &message{d: d})
