@@ -2,7 +2,7 @@ package rabbitmq
 
 import (
 	"github.com/go-seidon/provider/datetime"
-	"github.com/go-seidon/provider/identifier"
+	"github.com/go-seidon/provider/identity"
 	"github.com/go-seidon/provider/logging"
 	"github.com/go-seidon/provider/rabbitmq"
 )
@@ -10,7 +10,7 @@ import (
 type RabbitParam struct {
 	Connection rabbitmq.Connection
 	Clock      datetime.Clock
-	Identifier identifier.Identifier
+	Identifier identity.Identifier
 	Logger     logging.Logger
 }
 
@@ -28,7 +28,7 @@ func WithClock(c datetime.Clock) RabbitOption {
 	}
 }
 
-func WithIdentifier(i identifier.Identifier) RabbitOption {
+func WithIdentifier(i identity.Identifier) RabbitOption {
 	return func(p *RabbitParam) {
 		p.Identifier = i
 	}
