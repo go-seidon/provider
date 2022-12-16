@@ -1,14 +1,14 @@
 package system
 
-type SystemError struct {
+type Error struct {
 	Code    int32
 	Message string
 }
 
-func (e *SystemError) Error() string {
+func (e *Error) Error() string {
 	return e.Message
 }
 
-func NewError(c int32, m string) *SystemError {
-	return &SystemError{c, m}
+func NewError(c int32, m string) *Error {
+	return &Error{c, m}
 }

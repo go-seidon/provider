@@ -3,7 +3,7 @@ package ksuid_test
 import (
 	"testing"
 
-	"github.com/go-seidon/provider/identifier/ksuid"
+	"github.com/go-seidon/provider/identity/ksuid"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )

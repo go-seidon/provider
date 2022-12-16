@@ -13,7 +13,7 @@ var _ = Describe("Success Package", func() {
 			It("should return result", func() {
 				res := system.NewSuccess(1000, "success")
 
-				Expect(res).To(Equal(system.SystemSuccess{
+				Expect(res).To(Equal(system.Success{
 					Code:    1000,
 					Message: "success",
 				}))
