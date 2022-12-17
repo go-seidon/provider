@@ -56,6 +56,8 @@ generate-mock:
 	mockgen -package=mock_encoding -source encoding/encoder.go -destination=encoding/mock/encoder_mock.go
 	mockgen -package=mock_grpc -source grpc/stream.go -destination=grpc/mock/stream_mock.go
 	mockgen -package=mock_hashing -source hashing/hasher.go -destination=hashing/mock/hasher_mock.go
+	mockgen -package=mock_health -source health/health.go -destination=health/mock/health_mock.go
+	mockgen -package=mock_health -source health/checker/checker.go -destination=health/mock/checker_mock.go
 	mockgen -package=mock_http -source http/client.go -destination=http/mock/client_mock.go
 	mockgen -package=mock_http -source http/server.go -destination=http/mock/server_mock.go
 	mockgen -package=mock_identity -source identity/id.go -destination=identity/mock/id_mock.go
