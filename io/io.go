@@ -66,6 +66,13 @@ type ReadAtWriteSeeker interface {
 	Seeker
 }
 
+type ReadAtSeekCloser interface {
+	Reader
+	ReaderAt
+	Seeker
+	Closer
+}
+
 type ReaderFrom interface {
 	ReadFrom(r Reader) (n int64, err error)
 }

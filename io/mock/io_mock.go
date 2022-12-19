@@ -710,6 +710,88 @@ func (mr *MockReadAtWriteSeekerMockRecorder) Write(p interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Write", reflect.TypeOf((*MockReadAtWriteSeeker)(nil).Write), p)
 }
 
+// MockReadAtSeekCloser is a mock of ReadAtSeekCloser interface.
+type MockReadAtSeekCloser struct {
+	ctrl     *gomock.Controller
+	recorder *MockReadAtSeekCloserMockRecorder
+}
+
+// MockReadAtSeekCloserMockRecorder is the mock recorder for MockReadAtSeekCloser.
+type MockReadAtSeekCloserMockRecorder struct {
+	mock *MockReadAtSeekCloser
+}
+
+// NewMockReadAtSeekCloser creates a new mock instance.
+func NewMockReadAtSeekCloser(ctrl *gomock.Controller) *MockReadAtSeekCloser {
+	mock := &MockReadAtSeekCloser{ctrl: ctrl}
+	mock.recorder = &MockReadAtSeekCloserMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockReadAtSeekCloser) EXPECT() *MockReadAtSeekCloserMockRecorder {
+	return m.recorder
+}
+
+// Close mocks base method.
+func (m *MockReadAtSeekCloser) Close() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Close")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Close indicates an expected call of Close.
+func (mr *MockReadAtSeekCloserMockRecorder) Close() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Close", reflect.TypeOf((*MockReadAtSeekCloser)(nil).Close))
+}
+
+// Read mocks base method.
+func (m *MockReadAtSeekCloser) Read(p []byte) (int, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Read", p)
+	ret0, _ := ret[0].(int)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Read indicates an expected call of Read.
+func (mr *MockReadAtSeekCloserMockRecorder) Read(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Read", reflect.TypeOf((*MockReadAtSeekCloser)(nil).Read), p)
+}
+
+// ReadAt mocks base method.
+func (m *MockReadAtSeekCloser) ReadAt(p []byte, off int64) (int, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ReadAt", p, off)
+	ret0, _ := ret[0].(int)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ReadAt indicates an expected call of ReadAt.
+func (mr *MockReadAtSeekCloserMockRecorder) ReadAt(p, off interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadAt", reflect.TypeOf((*MockReadAtSeekCloser)(nil).ReadAt), p, off)
+}
+
+// Seek mocks base method.
+func (m *MockReadAtSeekCloser) Seek(offset int64, whence int) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Seek", offset, whence)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Seek indicates an expected call of Seek.
+func (mr *MockReadAtSeekCloserMockRecorder) Seek(offset, whence interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Seek", reflect.TypeOf((*MockReadAtSeekCloser)(nil).Seek), offset, whence)
+}
+
 // MockReaderFrom is a mock of ReaderFrom interface.
 type MockReaderFrom struct {
 	ctrl     *gomock.Controller
