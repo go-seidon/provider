@@ -10,24 +10,23 @@ import (
 )
 
 var _ = Describe("Time Package", func() {
-
 	Context("Time function", Label("unit"), func() {
 		When("input is empty", func() {
 			It("should return empty", func() {
 				res := typeconv.Time(time.Time{})
 
-				expectRes := time.Time{}
-				Expect(res).To(Equal(&expectRes))
+				r := time.Time{}
+				Expect(res).To(Equal(&r))
 			})
 		})
 
 		When("input is non empty", func() {
 			It("should return non empty", func() {
-				currentTs := time.Now()
+				currentTs := time.Now().UTC()
 				res := typeconv.Time(currentTs)
 
-				expectRes := currentTs
-				Expect(res).To(Equal(&expectRes))
+				r := currentTs
+				Expect(res).To(Equal(&r))
 			})
 		})
 	})
@@ -43,7 +42,7 @@ var _ = Describe("Time Package", func() {
 
 		When("input is empty", func() {
 			It("should return empty", func() {
-				input := time.Time{}
+				input := time.Time{}.UTC()
 				res := typeconv.TimeVal(&input)
 
 				Expect(res).To(Equal(time.Time{}))
@@ -52,7 +51,7 @@ var _ = Describe("Time Package", func() {
 
 		When("input is non empty", func() {
 			It("should return non empty", func() {
-				input := time.Now()
+				input := time.Now().UTC()
 				res := typeconv.TimeVal(&input)
 
 				Expect(res).To(Equal(input))
@@ -60,70 +59,64 @@ var _ = Describe("Time Package", func() {
 		})
 	})
 
-	Context("Duration function", Label("unit"), func() {
-		When("input is positive", func() {
-			It("should return positive", func() {
-				res := typeconv.Duration(time.Duration(2))
-
-				expectRes := time.Duration(2)
-				Expect(res).To(Equal(&expectRes))
-			})
-		})
-
-		When("input is negative", func() {
-			It("should return negative", func() {
-				res := typeconv.Duration(time.Duration(-2))
-
-				expectRes := time.Duration(-2)
-				Expect(res).To(Equal(&expectRes))
-			})
-		})
-
-		When("input is zero", func() {
-			It("should return zero", func() {
-				res := typeconv.Duration(time.Duration(0))
-
-				expectRes := time.Duration(0)
-				Expect(res).To(Equal(&expectRes))
-			})
-		})
-	})
-
-	Context("DurationVal function", Label("unit"), func() {
+	Context("UnixMilli function", Label("unit"), func() {
 		When("input is nil", func() {
-			It("should return zero", func() {
-				res := typeconv.DurationVal(nil)
+			It("should return nil", func() {
+				res := typeconv.UnixMilli(nil)
 
-				Expect(res).To(Equal(time.Duration(0)))
+				Expect(res).To(BeNil())
 			})
 		})
 
-		When("input is positive", func() {
-			It("should return positive", func() {
-				input := time.Duration(2)
-				res := typeconv.DurationVal(&input)
+		When("input is empty", func() {
+			It("should return empty", func() {
+				input := int64(0)
+				res := typeconv.UnixMilli(&input)
 
-				Expect(res).To(Equal(time.Duration(2)))
+				r := time.UnixMilli(input).UTC()
+				Expect(res).To(Equal(&r))
 			})
 		})
 
-		When("input is negative", func() {
-			It("should return negative", func() {
-				input := time.Duration(-2)
-				res := typeconv.DurationVal(&input)
+		When("input is non empty", func() {
+			It("should return non empty", func() {
+				ts := time.Now()
+				input := ts.UnixMilli()
+				res := typeconv.UnixMilli(&input)
 
-				Expect(res).To(Equal(time.Duration(-2)))
-			})
-		})
-
-		When("input is zero", func() {
-			It("should return zero", func() {
-				input := time.Duration(0)
-				res := typeconv.DurationVal(&input)
-
-				Expect(res).To(Equal(time.Duration(0)))
+				r := time.UnixMilli(ts.UnixMilli()).UTC()
+				Expect(res).To(Equal(&r))
 			})
 		})
 	})
 
+	Context("TimeMilli function", Label("unit"), func() {
+		When("input is nil", func() {
+			It("should return nil", func() {
+				res := typeconv.TimeMilli(nil)
+
+				Expect(res).To(BeNil())
+			})
+		})
+
+		When("input is empty", func() {
+			It("should return empty", func() {
+				input := time.UnixMilli(0)
+				res := typeconv.TimeMilli(&input)
+
+				r := input.UnixMilli()
+				Expect(res).To(Equal(&r))
+			})
+		})
+
+		When("input is non empty", func() {
+			It("should return non empty", func() {
+				input := time.Now()
+				res := typeconv.TimeMilli(&input)
+
+				r := input.UnixMilli()
+				Expect(res).To(Equal(&r))
+			})
+		})
+	})
 })
