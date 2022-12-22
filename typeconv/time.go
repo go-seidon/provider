@@ -5,23 +5,29 @@ import (
 )
 
 func Time(i time.Time) *time.Time {
-	return &i
+	t := i.UTC()
+	return &t
 }
 
 func TimeVal(i *time.Time) time.Time {
 	if i == nil {
-		return time.Time{}
+		return time.Time{}.UTC()
 	}
-	return *i
+	return i.UTC()
 }
 
-func Duration(i time.Duration) *time.Duration {
-	return &i
-}
-
-func DurationVal(i *time.Duration) time.Duration {
+func UnixMilli(i *int64) *time.Time {
 	if i == nil {
-		return 0
+		return nil
 	}
-	return *i
+	ms := time.UnixMilli(Int64Val(i))
+	return Time(ms)
+}
+
+func TimeMilli(i *time.Time) *int64 {
+	if i == nil {
+		return nil
+	}
+	t := i.UnixMilli()
+	return Int64(t)
 }

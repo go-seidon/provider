@@ -32,6 +32,10 @@ test:
 test-coverage:
 	ginkgo -r -v -p -race --progress --randomize-all --randomize-suites -cover -coverprofile="coverage.out"
 
+.PHONY: test-watch
+test-watch:
+	ginkgo watch -r -v -p -race --trace
+
 .PHONY: test-unit
 test-unit:
 	ginkgo -r -v -p -race --label-filter="unit" -cover -coverprofile="coverage.out"
