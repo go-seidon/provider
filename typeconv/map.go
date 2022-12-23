@@ -1,13 +1,23 @@
 package typeconv
 
+import (
+	"reflect"
+)
+
 func MapVal(i map[string]interface{}) map[string]interface{} {
+	r := map[string]interface{}{}
 	if i == nil {
-		return map[string]interface{}{}
+		return r
 	}
 	for k, v := range i {
-		if v == nil {
-			delete(i, k)
+		r[k] = v
+	}
+
+	for k, v := range r {
+		isPtrNil := reflect.ValueOf(v).Kind() == reflect.Ptr && reflect.ValueOf(v).IsNil()
+		if v == nil || isPtrNil {
+			delete(r, k)
 		}
 	}
-	return i
+	return r
 }
