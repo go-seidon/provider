@@ -52,6 +52,48 @@ var _ = Describe("Map Package", func() {
 					"key": "value",
 				}))
 			})
+
+			It("should not delete original data", func() {
+				input := map[string]interface{}{
+					"key": "value",
+					"nil": nil,
+				}
+				typeconv.MapVal(input)
+
+				Expect(input).To(Equal(map[string]interface{}{
+					"key": "value",
+					"nil": nil,
+				}))
+			})
+		})
+
+		When("input contain pointer of nil value", func() {
+			It("should return result", func() {
+				var str *string
+				input := map[string]interface{}{
+					"key": "value",
+					"nil": str,
+				}
+				res := typeconv.MapVal(input)
+
+				Expect(res).To(Equal(map[string]interface{}{
+					"key": "value",
+				}))
+			})
+
+			It("should not delete original data", func() {
+				var str *string
+				input := map[string]interface{}{
+					"key": "value",
+					"nil": str,
+				}
+				typeconv.MapVal(input)
+
+				Expect(input).To(Equal(map[string]interface{}{
+					"key": "value",
+					"nil": str,
+				}))
+			})
 		})
 	})
 })
