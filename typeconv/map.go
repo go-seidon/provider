@@ -10,13 +10,9 @@ func MapVal(i map[string]interface{}) map[string]interface{} {
 		return r
 	}
 	for k, v := range i {
-		r[k] = v
-	}
-
-	for k, v := range r {
 		isPtrNil := reflect.ValueOf(v).Kind() == reflect.Ptr && reflect.ValueOf(v).IsNil()
-		if v == nil || isPtrNil {
-			delete(r, k)
+		if v != nil && !isPtrNil {
+			r[k] = v
 		}
 	}
 	return r
