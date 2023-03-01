@@ -74,4 +74,5 @@ generate-mock:
 	mockgen -package=mock_random -source random/randomizer.go -destination=random/mock/randomizer_mock.go
 	mockgen -package=mock_slug -source slug/slugger.go -destination=slug/mock/slugger_mock.go
 	mockgen -package=mock_serialization -source serialization/serializer.go -destination=serialization/mock/serializer_mock.go
+	mockgen -package=mock_signature -source signature/signature.go -destination=signature/mock/signature_mock.go
 	mockgen -package=mock_validation -source validation/validator.go -destination=validation/mock/validator_mock.go
