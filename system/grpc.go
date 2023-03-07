@@ -32,6 +32,8 @@ func FromGrpc(err error) *Error {
 	case codes.Unavailable:
 		code = status.COMMUNICATION_FAILURE
 		message = "failed communicating with the host party"
+	case codes.AlreadyExists:
+		code = status.RESOURCE_EXISTS
 	}
 	return &Error{
 		Code:    code,

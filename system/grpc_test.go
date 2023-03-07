@@ -91,6 +91,19 @@ var _ = Describe("Grpc Package", func() {
 			})
 		})
 
+		When("status is already exists", func() {
+			It("should return error", func() {
+				err := status.Error(codes.AlreadyExists, "resource already exists")
+
+				res := system.FromGrpc(err)
+
+				Expect(res).To(Equal(&system.Error{
+					Code:    1007,
+					Message: "resource already exists",
+				}))
+			})
+		})
+
 		When("status is unavailable", func() {
 			It("should return error", func() {
 				err := status.Error(codes.Unavailable, "host error")
