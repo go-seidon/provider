@@ -65,19 +65,6 @@ var _ = Describe("Grpc Package", func() {
 			})
 		})
 
-		When("status is unauthenticated", func() {
-			It("should return error", func() {
-				err := status.Error(codes.Unauthenticated, "not authenticated")
-
-				res := system.FromGrpc(err)
-
-				Expect(res).To(Equal(&system.Error{
-					Code:    1003,
-					Message: "not authenticated",
-				}))
-			})
-		})
-
 		When("status is not found", func() {
 			It("should return error", func() {
 				err := status.Error(codes.NotFound, "resource not found")
@@ -87,6 +74,19 @@ var _ = Describe("Grpc Package", func() {
 				Expect(res).To(Equal(&system.Error{
 					Code:    1004,
 					Message: "resource not found",
+				}))
+			})
+		})
+
+		When("status is unavailable", func() {
+			It("should return error", func() {
+				err := status.Error(codes.Unavailable, "host error")
+
+				res := system.FromGrpc(err)
+
+				Expect(res).To(Equal(&system.Error{
+					Code:    1006,
+					Message: "failed communicating with the host party",
 				}))
 			})
 		})
@@ -104,17 +104,18 @@ var _ = Describe("Grpc Package", func() {
 			})
 		})
 
-		When("status is unavailable", func() {
+		When("status is unauthenticated", func() {
 			It("should return error", func() {
-				err := status.Error(codes.Unavailable, "host error")
+				err := status.Error(codes.Unauthenticated, "not authenticated")
 
 				res := system.FromGrpc(err)
 
 				Expect(res).To(Equal(&system.Error{
-					Code:    1006,
-					Message: "failed communicating with the host party",
+					Code:    1008,
+					Message: "not authenticated",
 				}))
 			})
 		})
+
 	})
 })
