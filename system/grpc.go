@@ -25,7 +25,7 @@ func FromGrpc(err error) *Error {
 		message = "failed processing request"
 	case codes.InvalidArgument:
 		code = status.INVALID_PARAM
-	case codes.PermissionDenied, codes.Unauthenticated:
+	case codes.PermissionDenied:
 		code = status.ACTION_FORBIDDEN
 	case codes.NotFound:
 		code = status.RESOURCE_NOTFOUND
@@ -34,6 +34,8 @@ func FromGrpc(err error) *Error {
 		message = "failed communicating with the host party"
 	case codes.AlreadyExists:
 		code = status.RESOURCE_EXISTS
+	case codes.Unauthenticated:
+		code = status.INVALID_CREDENTIAL
 	}
 	return &Error{
 		Code:    code,
